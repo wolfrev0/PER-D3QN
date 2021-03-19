@@ -45,18 +45,26 @@ class Full(nn.Module):
 class SnakeNet(nn.Module):
 	def __init__(self):
 		super(SnakeNet,self).__init__()
-		self.chn_in=4
-		self.chn_mid=16
-		self.chn_out=8
+		self.chn_in=5
+		self.chn_mid=64
+		self.chn_out=12
 
-		self.seq=nn.Sequential(
+		self.feature=nn.Sequential(
 			Conv(self.chn_in,self.chn_mid),
+			Resi(self.chn_mid),
+			Resi(self.chn_mid),
 			Resi(self.chn_mid),
 			Resi(self.chn_mid),
 			Conv(self.chn_mid,self.chn_out),
 			nn.Flatten(),
-			Full(self.chn_out*NROW*NCOL,128),
-			Full(128,4),
+		)
+		self.adv = nn.Sequential(
+			Full(self.chn_out*NROW*NCOL,256),
+			Full(256,4),
+		)
+		self.stval = nn.Sequential(
+			Full(self.chn_out*NROW*NCOL,256),
+			Full(256,1),
 		)
 		for x in self.modules():
 			if isinstance(x,nn.Conv2d) or isinstance(x,nn.Linear):
@@ -66,4 +74,8 @@ class SnakeNet(nn.Module):
 
 	def forward(self,x):
 		x = x.reshape(-1,self.chn_in,NROW,NCOL)
-		return self.seq(x)
+		x = self.feature(x)
+		adv = self.adv(x)
+		stval = self.stval(x)
+		qval = (adv-adv.mean())+stval
+		return qval
