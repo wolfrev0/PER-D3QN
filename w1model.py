@@ -45,13 +45,12 @@ class Full(nn.Module):
 class SnakeNet(nn.Module):
 	def __init__(self):
 		super(SnakeNet,self).__init__()
-		self.chn_in=4
+		self.chn_in=5
 		self.chn_mid=64
-		self.chn_out=8
+		self.chn_out=12
 
 		self.feature=nn.Sequential(
 			Conv(self.chn_in,self.chn_mid),
-			Resi(self.chn_mid),
 			Resi(self.chn_mid),
 			Resi(self.chn_mid),
 			Resi(self.chn_mid),
