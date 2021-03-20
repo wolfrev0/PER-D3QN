@@ -1,5 +1,6 @@
 # PER-D3QN
-Dueling Double Deep Q Network with Prioritized Experience Replay Memory
+Dueling Double Deep Q Network with Prioritized Experience Replay Memory  
+Compact Implementation  
 
 ## Trained Agent  
 ![Snake GIF](https://raw.githubusercontent.com/0xC0DEF/PER-D3QN/master/snake.gif)
