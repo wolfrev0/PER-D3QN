@@ -61,11 +61,11 @@ class SnakeNet(nn.Module):
 		)
 		self.adv = nn.Sequential(
 			Full(self.chn_out*NROW*NCOL,256),
-			Full(256,4),
+			Full(256,4,None),
 		)
 		self.stval = nn.Sequential(
 			Full(self.chn_out*NROW*NCOL,256),
-			Full(256,1),
+			Full(256,1,None),
 		)
 		for x in self.modules():
 			if isinstance(x,nn.Conv2d) or isinstance(x,nn.Linear):
