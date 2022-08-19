@@ -1,6 +1,5 @@
 # PER-D3QN
 [Dueling](https://arxiv.org/pdf/1511.06581.pdf) [Double](https://arxiv.org/pdf/1509.06461.pdf) [Deep Q Network](https://arxiv.org/pdf/1312.5602.pdf) with [Prioritized Experience Replay Memory](https://arxiv.org/pdf/1511.05952.pdf)  
-***Compact Implementation!!!***  
 
 ## Trained Agent  
 ![Snake GIF](https://raw.githubusercontent.com/0xC0DEF/PER-D3QN/master/snake.gif)
